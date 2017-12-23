@@ -47,11 +47,11 @@ model_rf <- randomForest(author_name ~.,
                          importance = TRUE
 )
 
-library(e1071)
-set.seed(1234)
-naivemodel <- naiveBayes(author_name ~., data = train_df %>% select(-id_word),laplace = 1)
+# library(e1071)
+# set.seed(1234)
+# naivemodel <- naiveBayes(author_name ~., data = train_df %>% select(-id_word),laplace = 1)
 
-author <- predict(naivemodel,newdata = test_df,type = "raw")
+# author <- predict(naivemodel,newdata = test_df,type = "raw")
 
 model_rf$confusion
 varImpPlot(model_rf)
@@ -74,4 +74,4 @@ names(test_df)[2] <- "V1_word"
 
 author <- predict(model_rf,newdata = test_df, type = 'prob')
 submission <- data.frame(id = test_df$id, author)
-write.csv(submission, "naivesubmission.csv",row.names = FALSE)
+write.csv(submission, "tmsubmission.csv",row.names = FALSE)
